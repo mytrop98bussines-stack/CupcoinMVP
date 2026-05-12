@@ -7,20 +7,23 @@ import { Text, Icon } from '@chakra-ui/react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 // Custom components
 import Card from 'components/card/Card';
+
 type CalendarValue = Date | [Date, Date] | null;
+
 export default function MiniCalendar(props: {
   selectRange: boolean;
   [x: string]: any;
 }) {
   const { selectRange, ...rest } = props;
   const [value, setValue] = useState<CalendarValue>(new Date());
+
   const handleChange = (
-    value: CalendarValue,
+    newValue: any, // Cambiado a any brevemente para evitar conflictos de tipos con la librería
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
-    setValue(value);
-    alert('New date is: ' + value);
+    setValue(newValue);
   };
+
   return (
     <Card
       alignItems="center"
@@ -37,8 +40,11 @@ export default function MiniCalendar(props: {
         selectRange={selectRange}
         view={'month'}
         tileContent={<Text color="brand.500" />}
-        prevLabel={<MdChevronLeft size="24px" style={{ marginTop: '4px' }} />}
-        nextLabel={<MdChevronRight size="24px" style={{ marginTop: '4px' }} />} 
+        /* CORRECCIÓN: Envolvemos el icono para que TypeScript lo acepte como componente */
+        prevLabel={<Icon as={() => <MdChevronLeft />} w="24px" h="24px" mt="4px" />}
+        nextLabel={<Icon as={() => <MdChevronRight />} w="24px" h="24px" mt="4px" />}
+      /> 
+      {/* CORRECCIÓN: Se añadió la etiqueta de cierre /> para el componente Calendar */}
     </Card>
   );
 }
