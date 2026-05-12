@@ -8,14 +8,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Install Dependencies
-        run: npm install
+        # Añadimos --legacy-peer-deps para solucionar el error de React 19
+        run: npm install --legacy-peer-deps
+
       - name: Build Project
         run: npm run build:clean
+
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CUPCOIN }}'
           channelId: live
-          projectId: tu-proyecto-id
+          # ¡OJO! Cambia 'tu-proyecto-id' por el ID real de tu proyecto en Firebase
+          projectId: cupcoin-b2b4f
           
