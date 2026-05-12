@@ -27,7 +27,8 @@ export default function Banner(props: { exp: string; cvv: string; number: string
 					<Text fontSize='2xl' fontWeight='bold'>
 						Glassy.
 					</Text>
-					<Icon as={RiMastercardFill} w='48px' h='auto' color='gray.400' />
+					{/* CORRECCIÓN: Añadimos 'as any' para saltar el error de tipos de React 19 */}
+					<Icon as={RiMastercardFill as any} w='48px' h='auto' color='gray.400' />
 				</Flex>
 				<Spacer />
 				<Flex direction='column'>
