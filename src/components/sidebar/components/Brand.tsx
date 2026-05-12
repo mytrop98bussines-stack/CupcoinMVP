@@ -1,5 +1,6 @@
 import React from 'react';
-import { Flex, Text, useColorModeValue } from '@chakra-ui/react';
+// CORRECCIÓN: Añadimos 'Box' a la lista de imports
+import { Flex, Text, useColorModeValue, Box } from '@chakra-ui/react';
 import { HSeparator } from 'components/separator/Separator';
 
 export default function SidebarBrand() {
