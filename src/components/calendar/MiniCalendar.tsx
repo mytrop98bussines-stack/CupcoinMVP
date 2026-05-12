@@ -18,11 +18,15 @@ export default function MiniCalendar(props: {
   const [value, setValue] = useState<CalendarValue>(new Date());
 
   const handleChange = (
-    newValue: any, // Cambiado a any brevemente para evitar conflictos de tipos con la librería
+    newValue: any,
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     setValue(newValue);
   };
+
+  // Definimos los iconos como componentes fuera del JSX para limpiar los tipos
+  const PrevIcon = () => <Icon as={MdChevronLeft as any} w="24px" h="24px" mt="4px" />;
+  const NextIcon = () => <Icon as={MdChevronRight as any} w="24px" h="24px" mt="4px" />;
 
   return (
     <Card
@@ -40,11 +44,9 @@ export default function MiniCalendar(props: {
         selectRange={selectRange}
         view={'month'}
         tileContent={<Text color="brand.500" />}
-        /* CORRECCIÓN: Envolvemos el icono para que TypeScript lo acepte como componente */
-        prevLabel={<Icon as={() => <MdChevronLeft />} w="24px" h="24px" mt="4px" />}
-        nextLabel={<Icon as={() => <MdChevronRight />} w="24px" h="24px" mt="4px" />}
+        prevLabel={<PrevIcon />}
+        nextLabel={<NextIcon />}
       /> 
-      {/* CORRECCIÓN: Se añadió la etiqueta de cierre /> para el componente Calendar */}
     </Card>
   );
 }
