@@ -9,9 +9,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
       - name: Install Dependencies
-        # Añadimos --legacy-peer-deps para solucionar el error de React 19
-        run: npm install --legacy-peer-deps
+        # Borramos archivos temporales para forzar a que AJV se instale bien
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install --legacy-peer-deps
 
       - name: Build Project
         run: npm run build:clean
@@ -21,6 +28,5 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CUPCOIN }}'
           channelId: live
-          # ¡OJO! Cambia 'tu-proyecto-id' por el ID real de tu proyecto en Firebase
           projectId: cupcoin-b2b4f
           
