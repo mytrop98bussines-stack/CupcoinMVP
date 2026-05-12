@@ -18,6 +18,24 @@ import {
   MdSwapHoriz,
 } from "react-icons/md";
 
+// Componente auxiliar para las filas de transacciones (CUPcoin P2P)
+const TransactionRow = (props: { name: string; date: string; amount: string; status: string }) => {
+  const { name, date, amount, status } = props;
+  const textColor = useColorModeValue("secondaryGray.900", "white");
+  return (
+    <Flex justifyContent='space-between' alignItems='center' py='12px' borderBottom='1px solid' borderColor='secondaryGray.100'>
+      <Box>
+        <Text color={textColor} fontWeight='700'>{name}</Text>
+        <Text color='secondaryGray.600' fontSize='sm'>{date}</Text>
+      </Box>
+      <Box textAlign='right'>
+        <Text color={textColor} fontWeight='700'>{amount}</Text>
+        <Text color={status === 'Completado' ? 'green.500' : 'orange.500'} fontSize='sm' fontWeight='500'>{status}</Text>
+      </Box>
+    </Flex>
+  );
+};
+
 export default function UserReports() {
   // Chakra Color Mode
   const brandColor = useColorModeValue("brand.500", "white");
@@ -94,6 +112,7 @@ export default function UserReports() {
           </Button>
         </SimpleGrid>
       </Card>      
+
       {/* Historial de Transacciones */}
       <Card mt='20px' p='20px'>
         <Text color={textColor} fontSize='xl' fontWeight='700' mb='20px'>
@@ -106,4 +125,5 @@ export default function UserReports() {
       </Card>
     </Box>
   );
-}
+          }
+        
