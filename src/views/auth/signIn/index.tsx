@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'; // Correcto
 // Chakra imports
 import { Box, Button, Flex, Heading, Icon, Text, useColorModeValue } from "@chakra-ui/react";
 // Custom components
@@ -11,7 +11,7 @@ import { auth, googleProvider } from "../../../firebase";
 import { signInWithPopup } from "firebase/auth";
 
 function SignIn() {
-  const history = useHistory();
+  const navigate = useNavigate(); // Cambiamos el nombre de history a navigate para que sea más claro
   const textColor = useColorModeValue("navy.700", "white");
   const googleBg = useColorModeValue("secondaryGray.300", "whiteAlpha.200");
   const googleText = useColorModeValue("navy.700", "white");
@@ -22,8 +22,8 @@ function SignIn() {
       const result = await signInWithPopup(auth, googleProvider);
       if (result.user) {
         console.log("Usuario logueado:", result.user);
-        // Redirección inmediata al perfil tras éxito
-        history.push("/admin/profile");
+        // CORRECCIÓN AQUÍ: En React Router 6 se usa navigate("/ruta") sin el .push
+        navigate("/admin/profile"); 
       }
     } catch (error) {
       console.error("Error en login:", error);
