@@ -33,7 +33,8 @@ export default function DailyTraffic(props: { [x: string]: any }) {
 					</Flex>
 				</Flex>
 				<Flex align='center'>
-					<Icon as={RiArrowUpSFill} color='green.500' />
+					{/* CORRECCIÓN AQUÍ: Añadimos 'as any' para compatibilidad con React 19 */}
+					<Icon as={RiArrowUpSFill as any} color='green.500' />
 					<Text color='green.500' fontSize='sm' fontWeight='700'>
 						+2.45%
 					</Text>
