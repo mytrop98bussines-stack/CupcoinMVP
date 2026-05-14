@@ -26,6 +26,7 @@ import { MdNotificationsNone, MdInfoOutline } from 'react-icons/md';
 import { IoMdMoon, IoMdSunny } from 'react-icons/io';
 import { FaEthereum } from 'react-icons/fa';
 import routes from 'routes';
+
 export default function HeaderLinks(props: { secondary: boolean }) {
 	const { secondary } = props;
 	const { colorMode, toggleColorMode } = useColorMode();
@@ -43,6 +44,7 @@ export default function HeaderLinks(props: { secondary: boolean }) {
 		'14px 17px 40px 4px rgba(112, 144, 176, 0.06)'
 	);
 	const borderButton = useColorModeValue('secondaryGray.500', 'whiteAlpha.200');
+
 	return (
 		<Flex
 			w={{ sm: '100%', md: 'auto' }}
@@ -72,7 +74,8 @@ export default function HeaderLinks(props: { secondary: boolean }) {
 				align='center'
 				me='6px'>
 				<Flex align='center' justify='center' bg={ethBox} h='29px' w='29px' borderRadius='30px' me='7px'>
-					<Icon color={ethColor} w='9px' h='14px' as={FaEthereum} />
+					{/* CORRECCIÓN: FaEthereum as any */}
+					<Icon color={ethColor} w='9px' h='14px' as={FaEthereum as any} />
 				</Flex>
 				<Text w='max-content' color={ethColor} fontSize='sm' fontWeight='700' me='6px'>
 					1,924
@@ -85,7 +88,8 @@ export default function HeaderLinks(props: { secondary: boolean }) {
 			<SidebarResponsive routes={routes} />
 			<Menu>
 				<MenuButton p='0px'>
-					<Icon mt='6px' as={MdNotificationsNone} color={navbarIcon} w='18px' h='18px' me='10px' />
+					{/* CORRECCIÓN: MdNotificationsNone as any */}
+					<Icon mt='6px' as={MdNotificationsNone as any} color={navbarIcon} w='18px' h='18px' me='10px' />
 				</MenuButton>
 				<MenuList
 					boxShadow={shadow}
@@ -118,7 +122,8 @@ export default function HeaderLinks(props: { secondary: boolean }) {
 
 			<Menu>
 				<MenuButton p='0px'>
-					<Icon mt='6px' as={MdInfoOutline} color={navbarIcon} w='18px' h='18px' me='10px' />
+					{/* CORRECCIÓN: MdInfoOutline as any */}
+					<Icon mt='6px' as={MdInfoOutline as any} color={navbarIcon} w='18px' h='18px' me='10px' />
 				</MenuButton>
 				<MenuList
 					boxShadow={shadow}
@@ -171,7 +176,8 @@ export default function HeaderLinks(props: { secondary: boolean }) {
 					h='18px'
 					w='18px'
 					color={navbarIcon}
-					as={colorMode === 'light' ? IoMdMoon : IoMdSunny}
+					/* CORRECCIÓN: Lógica de icono dinámico con as any */
+					as={(colorMode === 'light' ? IoMdMoon : IoMdSunny) as any}
 				/>
 			</Button>
 			<Menu>
