@@ -47,7 +47,8 @@ export default function NFT(props: {
 							transition='0.2s linear'
 							w='20px'
 							h='20px'
-							as={like ? IoHeart : IoHeartOutline}
+							/* CORRECCIÓN LÍNEA 50: Forzamos el tipo 'as any' para evitar error TS2322 en React 19 */
+							as={(like ? IoHeart : IoHeartOutline) as any}
 							color='brand.500'
 						/>
 					</Button>
@@ -149,4 +150,5 @@ export default function NFT(props: {
 			</Flex>
 		</Card>
 	);
-}
+										}
+								
