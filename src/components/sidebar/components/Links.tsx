@@ -1,4 +1,29 @@
-	// Reemplaza desde aquí hasta el final de createLinks
+/* eslint-disable */
+
+import { NavLink, useLocation } from 'react-router-dom';
+// chakra imports
+// Se añadió 'Icon' a las importaciones para corregir el error de tipos
+import { Box, Flex, HStack, Text, useColorModeValue, Icon } from '@chakra-ui/react';
+
+export function SidebarLinks(props: {
+	routes: RoutesType[];
+}) {
+	//   Chakra color mode
+	let location = useLocation();
+	let activeColor = useColorModeValue('gray.700', 'white');
+	let inactiveColor = useColorModeValue('secondaryGray.600', 'secondaryGray.600');
+	let activeIcon = useColorModeValue('brand.500', 'white');
+	let textColor = useColorModeValue('secondaryGray.500', 'white');
+	let brandColor = useColorModeValue('brand.500', 'brand.400');
+
+	const { routes } = props;
+
+	// verifica si la ruta está activa
+	const activeRoute = (routeName: string) => {
+		return location.pathname.includes(routeName);
+	};
+
+	// función que crea los enlaces de la barra lateral
 	const createLinks = (routes: RoutesType[]) => {
 		return routes.map((route: RoutesType, index: number) => {
 			if (route.layout === '/admin' || route.layout === '/auth' || route.layout === '/rtl') {
@@ -14,7 +39,10 @@
 										<Box
 											color={activeRoute(route.path.toLowerCase()) ? activeIcon : textColor}
 											me='18px'>
-											{/* CORRECCIÓN: Envolvemos el icono para limpiar los tipos de React 19 */}
+											{/* 
+											  CORRECCIÓN: Envolvemos el icono en un componente Icon de Chakra 
+											  y usamos 'as any' para asegurar compatibilidad con React 19 
+											*/}
 											<Icon as={route.icon as any} width='20px' height='20px' />
 										</Box>
 										<Text
@@ -53,3 +81,9 @@
 			}
 		});
 	};
+
+	// RENDER
+	return <>{createLinks(routes)}</>
+}
+
+export default SidebarLinks;
