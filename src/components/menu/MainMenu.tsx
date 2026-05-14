@@ -12,6 +12,7 @@ import {
 	useDisclosure,
 	useColorModeValue
 } from '@chakra-ui/react';
+
 // Assets
 import {
 	MdOutlineLightbulb,
@@ -19,7 +20,8 @@ import {
 	MdOutlinePerson,
 	MdOutlineCardGiftcard
 } from 'react-icons/md';
-import { IoEllipsisVertical } from 'react-icons/io5';
+// Asegúrate de que IoEllipsisVertical esté importado correctamente
+import { IoEllipsisVertical } from 'react-icons/io5'; 
 
 export default function Banner(props: { [x: string]: any }) {
 	const { ...rest } = props;
@@ -29,7 +31,6 @@ export default function Banner(props: { [x: string]: any }) {
 		{ color: 'secondaryGray.900', bg: 'unset' },
 		{ color: 'secondaryGray.500', bg: 'unset' }
 	);
-	const iconColor = useColorModeValue('brand.500', 'white');
 	const bgList = useColorModeValue('white', 'whiteAlpha.100');
 	const bgShadow = useColorModeValue('14px 17px 40px 4px rgba(112, 144, 176, 0.08)', 'unset');
 	const bgButton = useColorModeValue('secondaryGray.300', 'whiteAlpha.100');
@@ -53,6 +54,7 @@ export default function Banner(props: { [x: string]: any }) {
 				onClick={onOpen1}
 				borderRadius='10px'
 				{...rest}>
+				{/* YA CORREGIDO: as any */}
 				<Icon as={IoEllipsisVertical as any} w='24px' h='24px' color={textColor} />
 			</MenuButton>
 			<MenuList
@@ -75,7 +77,6 @@ export default function Banner(props: { [x: string]: any }) {
 					_focus={{ bg: 'transparent' }}
 					mb='10px'>
 					<Flex align='center'>
-						{/* Aplicamos as any a todos los iconos preventivamente */}
 						<Icon as={MdOutlinePerson as any} h='16px' w='16px' me='8px' />
 						<Text fontSize='sm' fontWeight='400'>
 							Perfil
@@ -132,4 +133,4 @@ export default function Banner(props: { [x: string]: any }) {
 			</MenuList>
 		</Menu>
 	);
-}
+						}
