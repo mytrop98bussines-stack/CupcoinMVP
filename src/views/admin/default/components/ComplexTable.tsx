@@ -14,8 +14,6 @@ import * as React from 'react';
 // Assets
 import { MdCancel, MdCheckCircle, MdOutlineError } from 'react-icons/md';
 
-
-
 type RowObj = {
 	name: string;
 	status: string;
@@ -25,13 +23,13 @@ type RowObj = {
 
 const columnHelper = createColumnHelper<RowObj>();
 
-// const columns = columnsDataCheck;
 export default function ComplexTable(props: { tableData: any }) {
 	const { tableData } = props;
 	const [ sorting, setSorting ] = React.useState<SortingState>([]);
 	const textColor = useColorModeValue('secondaryGray.900', 'white');
 	const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100');
 	let defaultData = tableData;
+	
 	const columns = [
 		columnHelper.accessor('name', {
 			id: 'name',
@@ -64,34 +62,35 @@ export default function ComplexTable(props: { tableData: any }) {
 				</Text>
 			),
 			cell: (info) => (
-			<Flex align='center'>
-												<Icon
-													w='24px'
-													h='24px'
-													me='5px'
-													color={
-														info.getValue() === 'Approved' ? (
-															'green.500'
-														) : info.getValue() === 'Disable' ? (
-															'red.500'
-														) : info.getValue() === 'Error' ? (
-															'orange.500'
-														) : null
-													}
-													as={
-														info.getValue() === 'Approved' ? (
-															MdCheckCircle
-														) : info.getValue() === 'Disable' ? (
-															MdCancel
-														) : info.getValue() === 'Error' ? (
-															MdOutlineError
-														) : null
-													}
-												/>
-												<Text color={textColor} fontSize='sm' fontWeight='700'>
-													{info.getValue()}
-												</Text>
-											</Flex> 
+				<Flex align='center'>
+					<Icon
+						w='24px'
+						h='24px'
+						me='5px'
+						color={
+							info.getValue() === 'Approved' ? (
+								'green.500'
+							) : info.getValue() === 'Disable' ? (
+								'red.500'
+							) : info.getValue() === 'Error' ? (
+								'orange.500'
+							) : 'gray.400'
+						}
+						/* CORRECCIÓN: Usamos 'as any' para los iconos dinámicos */
+						as={
+							(info.getValue() === 'Approved' ? (
+								MdCheckCircle
+							) : info.getValue() === 'Disable' ? (
+								MdCancel
+							) : info.getValue() === 'Error' ? (
+								MdOutlineError
+							) : MdOutlineError) as any
+						}
+					/>
+					<Text color={textColor} fontSize='sm' fontWeight='700'>
+						{info.getValue()}
+					</Text>
+				</Flex> 
 			)
 		}),
 		columnHelper.accessor('date', {
@@ -129,6 +128,7 @@ export default function ComplexTable(props: { tableData: any }) {
 			)
 		})
 	];
+
 	const [ data, setData ] = React.useState(() => [ ...defaultData ]);
 	const table = useReactTable({
 		data,
@@ -141,6 +141,7 @@ export default function ComplexTable(props: { tableData: any }) {
 		getSortedRowModel: getSortedRowModel(),
 		debugTable: true
 	});
+
 	return (
 		<Card flexDirection='column' w='100%' px='0px' overflowX={{ sm: 'scroll', lg: 'hidden' }}>
 			<Flex px='25px' mb="8px" justifyContent='space-between' align='center'>
@@ -202,5 +203,5 @@ export default function ComplexTable(props: { tableData: any }) {
 			</Box>
 		</Card>
 	);
-}
- 
+		}
+										
