@@ -176,7 +176,7 @@ export default function HeaderLinks(props: { secondary: boolean }) {
 					h='18px'
 					w='18px'
 					color={navbarIcon}
-					/* CORRECCIÓN: Lógica de icono dinámico con as any */
+					/* CORRECCIÓN: Envolvemos la lógica condicional con as any para React 19 */
 					as={(colorMode === 'light' ? IoMdMoon : IoMdSunny) as any}
 				/>
 			</Button>
@@ -235,3 +235,4 @@ HeaderLinks.propTypes = {
 	secondary: PropTypes.bool,
 	onOpen: PropTypes.func
 };
+								
