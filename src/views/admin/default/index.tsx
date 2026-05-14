@@ -55,7 +55,8 @@ export default function UserReports() {
               w='56px'
               h='56px'
               bg={boxBg}
-              icon={<Icon w='32px' h='32px' as={MdAttachMoney} color={brandColor} />}
+              /* CORRECCIÓN: as any */
+              icon={<Icon w='32px' h='32px' as={MdAttachMoney as any} color={brandColor} />}
             />
           }
           name='Precio USDT (P2P)'
@@ -67,7 +68,8 @@ export default function UserReports() {
               w='56px'
               h='56px'
               bg={boxBg}
-              icon={<Icon w='32px' h='32px' as={MdShowChart} color='green.500' />}
+              /* CORRECCIÓN: as any */
+              icon={<Icon w='32px' h='32px' as={MdShowChart as any} color='green.500' />}
             />
           }
           name='Precio MLC'
@@ -79,7 +81,8 @@ export default function UserReports() {
               w='56px'
               h='56px'
               bg='linear-gradient(90deg, #422AFB 0%, #1B0E75 100%)'
-              icon={<Icon w='32px' h='32px' as={MdAccountBalanceWallet} color='white' />}
+              /* CORRECCIÓN: as any */
+              icon={<Icon w='32px' h='32px' as={MdAccountBalanceWallet as any} color='white' />}
             />
           }
           name='Tu Saldo Aprox.'
@@ -94,7 +97,8 @@ export default function UserReports() {
         </Text>
         <SimpleGrid columns={{ base: 1, md: 2 }} gap='20px'>
           <Button
-            leftIcon={<Icon as={MdSwapHoriz} />}
+            /* CORRECCIÓN: as any */
+            leftIcon={<Icon as={MdSwapHoriz as any} />}
             variant='brand'
             py='25px'
             fontSize='lg'
@@ -102,7 +106,8 @@ export default function UserReports() {
             Comprar USDT
           </Button>
           <Button
-            leftIcon={<Icon as={MdSwapHoriz} />}
+            /* CORRECCIÓN: as any */
+            leftIcon={<Icon as={MdSwapHoriz as any} />}
             variant='outline'
             py='25px'
             fontSize='lg'
@@ -125,5 +130,5 @@ export default function UserReports() {
       </Card>
     </Box>
   );
-          }
-        
+    }
+                      
