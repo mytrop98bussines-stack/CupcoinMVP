@@ -36,7 +36,6 @@ export default function Banner(props: { [x: string]: any }) {
 	const bgHover = useColorModeValue('secondaryGray.400', 'whiteAlpha.200');
 	const bgFocus = useColorModeValue('secondaryGray.300', 'whiteAlpha.100');
 
-	// Ellipsis types
 	const { isOpen: isOpen1, onOpen: onOpen1, onClose: onClose1 } = useDisclosure();
 
 	return (
@@ -54,7 +53,6 @@ export default function Banner(props: { [x: string]: any }) {
 				onClick={onOpen1}
 				borderRadius='10px'
 				{...rest}>
-				{/* CORRECCIÓN AQUÍ: Añadimos 'as any' al icono IoEllipsisVertical */}
 				<Icon as={IoEllipsisVertical as any} w='24px' h='24px' color={textColor} />
 			</MenuButton>
 			<MenuList
@@ -73,21 +71,64 @@ export default function Banner(props: { [x: string]: any }) {
 					_hover={textHover}
 					p='0px'
 					borderRadius='8px'
-					_active={{
-						bg: 'transparent'
-					}}
-					_focus={{
-						bg: 'transparent'
-					}}
+					_active={{ bg: 'transparent' }}
+					_focus={{ bg: 'transparent' }}
 					mb='10px'>
 					<Flex align='center'>
+						{/* Aplicamos as any a todos los iconos preventivamente */}
 						<Icon as={MdOutlinePerson as any} h='16px' w='16px' me='8px' />
 						<Text fontSize='sm' fontWeight='400'>
 							Perfil
 						</Text>
 					</Flex>
 				</MenuItem>
-				{/* ... otros items del menú ... */}
+				<MenuItem
+					transition='0.2s linear'
+					p='0px'
+					borderRadius='8px'
+					color={textColor}
+					_hover={textHover}
+					_active={{ bg: 'transparent' }}
+					_focus={{ bg: 'transparent' }}
+					mb='10px'>
+					<Flex align='center'>
+						<Icon as={MdOutlineCardGiftcard as any} h='16px' w='16px' me='8px' />
+						<Text fontSize='sm' fontWeight='400'>
+							Panel Neutral
+						</Text>
+					</Flex>
+				</MenuItem>
+				<MenuItem
+					transition='0.2s linear'
+					p='0px'
+					borderRadius='8px'
+					color={textColor}
+					_hover={textHover}
+					_active={{ bg: 'transparent' }}
+					_focus={{ bg: 'transparent' }}
+					mb='10px'>
+					<Flex align='center'>
+						<Icon as={MdOutlineLightbulb as any} h='16px' w='16px' me='8px' />
+						<Text fontSize='sm' fontWeight='400'>
+							Guía Rápida
+						</Text>
+					</Flex>
+				</MenuItem>
+				<MenuItem
+					transition='0.2s linear'
+					color={textColor}
+					_hover={textHover}
+					p='0px'
+					borderRadius='8px'
+					_active={{ bg: 'transparent' }}
+					_focus={{ bg: 'transparent' }}>
+					<Flex align='center'>
+						<Icon as={MdOutlineSettings as any} h='16px' w='16px' me='8px' />
+						<Text fontSize='sm' fontWeight='400'>
+							Configuración
+						</Text>
+					</Flex>
+				</MenuItem>
 			</MenuList>
 		</Menu>
 	);
