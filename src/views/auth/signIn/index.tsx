@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from 'react-router-dom'; // Correcto
+import { useNavigate } from 'react-router-dom';
 // Chakra imports
 import { Box, Button, Flex, Heading, Icon, Text, useColorModeValue } from "@chakra-ui/react";
 // Custom components
@@ -11,7 +11,7 @@ import { auth, googleProvider } from "../../../firebase";
 import { signInWithPopup } from "firebase/auth";
 
 function SignIn() {
-  const navigate = useNavigate(); // Cambiamos el nombre de history a navigate para que sea más claro
+  const navigate = useNavigate();
   const textColor = useColorModeValue("navy.700", "white");
   const googleBg = useColorModeValue("secondaryGray.300", "whiteAlpha.200");
   const googleText = useColorModeValue("navy.700", "white");
@@ -22,7 +22,6 @@ function SignIn() {
       const result = await signInWithPopup(auth, googleProvider);
       if (result.user) {
         console.log("Usuario logueado:", result.user);
-        // CORRECCIÓN AQUÍ: En React Router 6 se usa navigate("/ruta") sin el .push
         navigate("/admin/profile"); 
       }
     } catch (error) {
@@ -67,7 +66,12 @@ function SignIn() {
           _focus={{ bg: "secondaryGray.300" }}
           onClick={handleGoogleSignIn}
           w='100%'>
-          <Icon as={FcGoogle} w='20px' h='20px' me='10px' />
+          
+          {/* SOLUCIÓN AL ERROR DE TYPESCRIPT AQUÍ */}
+          <Icon w='20px' h='20px' me='10px'>
+            <FcGoogle />
+          </Icon>
+          
           Iniciar sesión con Google
         </Button>
       </Flex>
